@@ -1,1 +1,1 @@
-# repository for python_training пдт-python-21
+# repository for python_training пдт-python-21.
