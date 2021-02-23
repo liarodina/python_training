@@ -1,33 +1,29 @@
+
 # -*- coding: utf-8 -*-
-from selenium import webdriver
 import pytest
 from group import Group
 from application import Application
 
-#  функция инициализации фикстру
-def app():
+
+# функция инициализации фикстру
+# пометка для pytest
+@pytest.fixture
+def app(request):
+   # создаем фикстуру = объект типа application
+   fixture = Application()
+   request.addfinalizer(fixture.destroy)
+   # верни фикструру
+   return fixture
 
 
-
-class TestAddGroup(unittest.TestCase):
-    def setUp(self):
-        # инициализация фикстуры
-        self.app = Application()
-
-    def test_add_group(self):
-        self.app.login(username="admin", password="secret")
-        self.app.create_group(Group(name="qqq", header="qqq", footer="qqq"))
-        self.app.logout()
-
-    def test_add_empty_group(self):
-        self.app.login(username="admin", password="secret")
-        self.app.create_group( Group(name="", header="", footer=""))
-        self.app.logout()
-
-    def tearDown(self):
-        self.app.destroy()
+# в качестве параметра(был self) принимаем  fixture = Application()
+def test_add_group(app):
+   app.login(username="admin", password="secret")
+   app.create_group(Group(name="qqq", header="qqq", footer="qqq"))
+   app.logout()
 
 
-
-if __name__ == "__main__":
-    unittest.main()
+def test_add_empty_group(app):
+   app.login(username="admin", password="secret")
+   app.create_group(Group(name="", header="", footer=""))
+   app.logout()
