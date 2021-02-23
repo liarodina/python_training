@@ -5,16 +5,11 @@ from model.group import Group
 from fixture.application import Application
 
 
-# функция инициализации фикстру
-# пометка для pytest
 @pytest.fixture
 def app(request):
-   # создаем фикстуру = объект типа application
    fixture = Application()
    request.addfinalizer(fixture.destroy)
-   # верни фикструру
    return fixture
-
 
 # в качестве параметра(был self) принимаем  fixture = Application()
 def test_add_group(app):
