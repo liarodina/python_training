@@ -1,7 +1,8 @@
 import time
 # класс-помощник
-class SessionHelper:
 
+
+class SessionHelper:
     def __init__(self, app):
         self.app = app
     # переносим вспомогательные методы login logout
