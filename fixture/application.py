@@ -9,8 +9,7 @@ class Application:
 
     def __init__(self):
         self.wd = webdriver.Firefox()
-        self.wd.implicitly_wait(5)
-        # помошник получает ссылку на объект класса Application
+        # помощник получает ссылку на объект класса Application
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
         self.contact = ContactHelper(self)

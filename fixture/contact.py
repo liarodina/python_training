@@ -1,5 +1,6 @@
 import time
 
+
 class ContactHelper:
 
     def __init__(self, app):
@@ -7,7 +8,8 @@ class ContactHelper:
 
     def return_to_home_page(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        if not (wd.current_url.endswith("/index.php") and len(wd.find_elements_by_value("Send e-Mail")) > 0):
+            wd.find_element_by_link_text("home").click()
 
     def create(self, contact):
         # init contact creation
